@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import os
+import warnings
+
 from craft_text_detector import (
     read_image,
     load_craftnet_model,
@@ -26,6 +28,8 @@ def preprocess_image(image_path):
 
 
 def image_crafting(image_path):
+    warnings.filterwarnings("ignore")
+
     # Preprocess image
     image = preprocess_image(image_path)
 
@@ -61,5 +65,6 @@ def image_crafting(image_path):
         output_dir=output_dir,
         rectify=True
     )
+    warnings.filterwarnings("default")
 
     return exported_file_paths
